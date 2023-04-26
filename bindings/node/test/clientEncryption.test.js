@@ -54,11 +54,15 @@ describe('ClientEncryption', function () {
   }
 
   async function setup() {
+    console.log('SETUP', process.env.MONGODB_URI);
     client = new MongoClient(process.env.MONGODB_URI || 'mongodb://localhost:27017/test');
+    console.log('CONNECTING');
     await client.connect();
     try {
+      console.log('DROPPING COLLECTION');
       await client.db('client').collection('encryption').drop();
     } catch (err) {
+      console.log('ERROR', err);
       throwIfNotNsNotFoundError(err);
     }
   }
