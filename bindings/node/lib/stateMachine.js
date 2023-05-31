@@ -286,6 +286,7 @@ module.exports = function (modules) {
         function onerror(err) {
           destroySockets();
           const mcError = new MongoCryptError('KMS request failed');
+          console.log('error', err);
           mcError.originalError = err;
           reject(mcError);
         }
